@@ -3,7 +3,9 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
-@plugin "daisyui";
+@plugin "daisyui" {
+    themes: light --default;
+};
 
 @theme {
     --font-sans: "Segoe UI", sans-serif;
@@ -25,7 +27,7 @@ p {
 
 #wrapper {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 1fr auto;
     min-height: 100vh;
     min-height: 100dvh;
 }

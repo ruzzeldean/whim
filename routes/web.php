@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\WhimController;
 use Illuminate\Support\Facades\Route;
 
-/* Route::get('/', function () {
-    return view('index');
-}); */
+Route::redirect('/', '/home');
+Route::view('/home', 'index');
 
-Route::view('/', 'index');
+Route::get('/whims', [WhimController::class, 'index'])->name('whims.index');
