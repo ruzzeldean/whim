@@ -9,12 +9,13 @@
         </div>
         <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
           <li><a href="/home">Home</a></li>
-          <li><a href="{{ route('whims.index') }}">Whims</a></li>
+          <li><a href="/">Whims</a></li>
           <li><a>About</a></li>
         </ul>
       </div>
-      <a href="/home" class="font-semibold text-xl ml-2.5 lg:ml-0">Whim</a>
+      <a href="/" class="font-semibold text-xl ml-2.5 lg:ml-0">Whim</a>
     </div>
+
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li><a href="/home">Home</a></li>
@@ -22,6 +23,7 @@
         <li><a>About</a></li>
       </ul>
     </div>
+
     <div class="navbar-end">
       <a href="https://github.com/ruzzeldean/whim" target="_blank" class="btn lg:mr-0.5">Source</a>
     </div>

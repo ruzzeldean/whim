@@ -31,7 +31,6 @@ class Whim extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug')
-            ->generateSlugsOnUpdate()
             ->slugsShouldBeNoLongerThan(50);
     }
 }

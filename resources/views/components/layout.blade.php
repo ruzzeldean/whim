@@ -12,17 +12,25 @@
 <body>
   <div id="wrapper" class="">
 
-    <x-nav />
+    @guest
+      <x-nav />
 
-    <main class="w-full max-w-7xl mt-15  mx-auto px-5 py-7 space-y-5">
-      {{ $slot }}
-    </main>
+      <main class="w-full max-w-7xl mt-15 mx-auto px-5 py-7 space-y-5">
+        {{ $slot }}
+      </main>
 
-    <footer class="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4">
-      <aside>
-        <p>Copyright © 2026 - All right reserved by Ruzzel Dean Parungao</p>
-      </aside>
-    </footer>
+      <footer class="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4">
+        <aside>
+          <p>Copyright © 2026 - All right reserved by Ruzzel Dean Parungao</p>
+        </aside>
+      </footer>
+    @endguest
+
+    @auth
+      <x-admin.layout>
+        {{ $slot }}
+      </x-admin.layout>
+    @endauth
 
   </div>
 </body>

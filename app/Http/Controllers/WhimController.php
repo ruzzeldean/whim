@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreWhimRequest;
 use App\Models\Whim;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WhimController extends Controller
 {
@@ -26,9 +29,23 @@ class WhimController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreWhimRequest $request): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('whims', 'public');
+        }
+
+        Auth::user()->whims()->create([
+            'title' => $validated['title'],
+            'description' => $validated['description'] ?? null,
+            'image_path' => $imagePath,
+        ]);
+
+        return redirect()->route('admin.whims')
+            ->with('success', 'Whim created.');
     }
 
     /**
