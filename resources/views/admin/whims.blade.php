@@ -10,6 +10,33 @@
     </div>
   </div>
 
+  <div class="mt-3">
+    @if ($whims->count())
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @foreach ($whims as $whim)
+          <div class="card bg-base-100 shadow-sm">
+            <figure>
+              <img src="{{ asset('storage/' . $whim->image_path) }}" alt="Post image" />
+            </figure>
+
+            <div class="card-body">
+              <h2 class="card-title">{{ $whim->title }}</h2>
+
+              <p>{{ $whim->description }}</p>
+              <div class="card-actions justify-end">
+                <button class="btn btn-primary">View</button>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    @else
+      <div class="text-center py-50">
+        <p>Nothing here yet. Start with a whim.</p>
+      </div>
+    @endif
+  </div>
+
 
   <dialog id="create_modal" class="modal">
     <div class="modal-box">
@@ -17,7 +44,7 @@
         <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       </form>
       <h3 class="text-xl font-medium mb-3">Create</h3>
-      <form action="" method="POST" class="space-y-2">
+      <form action="{{ route('whim.store') }}" method="POST" enctype="multipart/form-data" class="space-y-2">
         @csrf
 
         <div class="space-y-1">
