@@ -1,5 +1,5 @@
 <x-layout>
-  <div class="grid md:grid-cols-2">
+  <div class="grid md:grid-cols-2 mb-4">
     <div>
       <h1 class="text-2xl">Whims</h1>
       <p class="text-sm text-zinc-500">Every thought deserves a home.</p>
@@ -10,21 +10,24 @@
     </div>
   </div>
 
-  <div class="mt-3">
+  <div>
     @if ($whims->count())
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach ($whims as $whim)
           <div class="card bg-base-100 shadow-sm">
             <figure>
-              <img src="{{ asset('storage/' . $whim->image_path) }}" alt="Post image" />
+              <img src="{{ asset('storage/' . $whim->image_path) }}" alt="Post image"
+                class="aspect-video object-cover object-center bg-base-200" />
             </figure>
 
             <div class="card-body">
               <h2 class="card-title">{{ $whim->title }}</h2>
 
-              <p>{{ $whim->description }}</p>
-              <div class="card-actions justify-end">
-                <button class="btn btn-primary">View</button>
+              <p class="line-clamp-3">{{ $whim->description }}</p>
+              <div class="flex mt-2">
+                <span class="text-sm text-gray-500 self-center">{{ $whim->created_at->diffForHumans() }}</span>
+
+                <a href="{{ route('whim.show', $whim) }}" class="btn btn-primary ml-auto">View</a>
               </div>
             </div>
           </div>

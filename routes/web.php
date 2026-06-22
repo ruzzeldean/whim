@@ -21,6 +21,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/whims', [AdminController::class, 'whims'])->name('admin.whims');
 
     Route::post('/whims', [WhimController::class, 'store'])->name('whim.store');
+    Route::get('/whims/{whim}', [WhimController::class, 'show'])->name('whim.show');
 });
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

@@ -53,7 +53,9 @@ class WhimController extends Controller
      */
     public function show(Whim $whim)
     {
-        //
+        return view('admin.show', [
+            'whim' => $whim,
+        ]);
     }
 
     /**
