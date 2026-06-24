@@ -7,6 +7,7 @@ use App\Models\Whim;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class WhimController extends Controller
 {
@@ -79,6 +80,12 @@ class WhimController extends Controller
      */
     public function destroy(Whim $whim)
     {
-        //
+        if ($whim->image_path && Storage::disk('public')->exists($whim->image_path)) {
+            Storage::disk('public')->delete($whim->image_path);
+        }
+
+        $whim->delete();
+
+        return redirect()->route('admin.whims');
     }
 }

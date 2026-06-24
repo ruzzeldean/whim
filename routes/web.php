@@ -22,6 +22,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::post('/whims', [WhimController::class, 'store'])->name('whim.store');
     Route::get('/whims/{whim}', [WhimController::class, 'show'])->name('whim.show');
+    Route::delete('/whims/{whim}', [WhimController::class, 'destroy'])->name('whim.destroy');
 });
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
