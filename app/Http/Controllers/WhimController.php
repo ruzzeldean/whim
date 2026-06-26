@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreWhimRequest;
+use App\Http\Requests\UpdateWhimRequest;
 use App\Models\Whim;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -70,9 +70,27 @@ class WhimController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Whim $whim)
+    public function update(UpdateWhimRequest $request, $id)
     {
-        //
+        $whim = Whim::findOrFail($id);
+
+        $data = $request->safe()->except(['image']);
+
+        $image = $whim->image_path;
+
+        if ($request->hasFile('image')) {
+            if ($image && Storage::disk('public')->exists($image)) {
+                Storage::disk('public')->delete($image);
+            }
+
+            $newPath = $request->file('image')->store('whims', 'public');
+
+            $data['image_path'] = $newPath;
+        }
+
+        $whim->update($data);
+
+        return back()->with('success', 'Whim updated successfully');
     }
 
     /**

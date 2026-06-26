@@ -10,7 +10,7 @@
     </a>
 
     <div class="ml-auto">
-      <button class="btn">Edit</button>
+      <button class="btn" onclick="edit_modal.showModal()">Edit</button>
       <button class="btn btn-outline btn-error" onclick="delete_modal.showModal()">Delete</button>
     </div>
   </div>
@@ -27,6 +27,37 @@
       <span class="text-sm text-gray-500">{{ $whim->created_at->diffForHumans() }}</span>
     </div>
   </div>
+
+  <dialog id="edit_modal" class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <h3 class="text-xl font-medium mb-3">Update Whim</h3>
+      <form action="{{ route('whim.update', $whim) }}" method="POST" enctype="multipart/form-data" class="space-y-2">
+        @csrf
+        @method('PATCH')
+
+        <div class="space-y-1">
+          <label for="title" class="label">Title</label>
+          <input type="text" name="title" id="title" placeholder="Title" class="input w-full"
+            value="{{ $whim->title }}">
+        </div>
+
+        <div class="space-y-1">
+          <label for="image" class="label">Image</label>
+          <input type="file" name="image" id="image" class="file-input w-full" accept="image/*">
+        </div>
+
+        <div class="space-y-1">
+          <label for="description" class="label">Description</label>
+          <textarea name="description" id="description" class="textarea w-full" rows="4" placeholder="Aa">{{ $whim->description }}</textarea>
+        </div>
+
+        <button id="submit" class="btn btn-primary w-full mt-3">Update</button>
+      </form>
+    </div>
+  </dialog>
 
   <dialog id="delete_modal" class="modal">
     <div class="modal-box">
