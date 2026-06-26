@@ -90,7 +90,7 @@ class WhimController extends Controller
 
         $whim->update($data);
 
-        return back()->with('success', 'Whim updated successfully');
+        return redirect()->route('whim.show', $whim->slug)->with('success', 'Whim updated successfully');
     }
 
     /**
